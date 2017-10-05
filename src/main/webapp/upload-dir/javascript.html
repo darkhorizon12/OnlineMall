@@ -1,0 +1,48 @@
+1. 함수 선언식 : function declaration
+	function declaration() {}
+
+2. 기명 함수 표현식 : named function expression
+	var named = function named() {};
+	
+3. 익명 함수 표현식 : anonymous function expression
+	var anony = function() {};
+	
+4. 기명 즉시 실행 함수 : named immediately-invoked function
+	(function company(){}());
+
+5. 익명 즉시 실행 함수 : anonymous immediately-invoked function
+	(function(){}());
+	
+	
+의문 : 
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script>
+$(document).ready(function() {
+	console.log("$(document).ready()");
+});
+
+$(function() {
+    console.log("short cut to ready!" );
+});
+
+$(window).on( "load", function() {
+	console.log("window.load");
+});
+
+(function() {
+	console.log("anonymous immediately-invoke function");
+}());
+
+var fn = function() {
+	console.log("anonymous function expression");
+};
+
+fn();
+    </script>
+</head>
+<body>
+    <iframe src="http://darkhorizon.tistory.com"></iframe>
+</body>
+</html>
