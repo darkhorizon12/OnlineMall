@@ -1,6 +1,25 @@
 package org.juon;
 
+import static org.junit.Assert.*;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.juon.jpashop.addtional.OrderSearch;
+import org.juon.jpashop.domain.Address;
+import org.juon.jpashop.domain.Member;
+import org.juon.jpashop.domain.Order;
+import org.juon.jpashop.domain.item.Book;
+import org.juon.jpashop.domain.item.Item;
+import org.juon.jpashop.enums.OrderStatus;
+import org.juon.jpashop.exception.NotEnoughStockException;
+import org.juon.jpashop.repository.OrderRepository;
+import org.juon.jpashop.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,8 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class OrderServiceTest {
 
-/*	@PersistenceContext
-	EntityManager em;
+	@PersistenceContext 	EntityManager em;
 	
 	@Autowired OrderService orderService;
 	@Autowired OrderRepository orderRepository;
@@ -61,7 +79,7 @@ public class OrderServiceTest {
 		orderSearch.setMemberName("member1");
 		orderSearch.setOrderStatus(OrderStatus.ORDERED);
 		
-		List<Order> getOrders = orderRepository.findAll(orderSearch);
+		List<Order> getOrders = orderService.findOrders(orderSearch);
 		
 		assertEquals("총 주문 건수가 정확해야 한다.", 2, getOrders.size());
 	}
@@ -117,5 +135,5 @@ public class OrderServiceTest {
 		
 		return book;
 	}
-*/
+
 }

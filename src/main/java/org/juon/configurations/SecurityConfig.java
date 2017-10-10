@@ -22,7 +22,7 @@ import org.springframework.security.web.authentication.rememberme.TokenBasedReme
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
-	public static final String REMEMBER_ME_KEY = "arahansaKey";
+	public static final String REMEMBER_ME_KEY = "finrirKey";
 	@Autowired DataSource dataSource;
 	@Autowired UserDetailsService userDetailsService;
 	
