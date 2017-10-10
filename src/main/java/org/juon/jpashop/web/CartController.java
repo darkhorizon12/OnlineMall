@@ -1,7 +1,6 @@
 package org.juon.jpashop.web;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.juon.jpashop.domain.Cart;
 import org.juon.jpashop.domain.Member;
@@ -10,6 +9,11 @@ import org.juon.jpashop.service.CartService;
 import org.juon.jpashop.service.ItemService;
 import org.juon.jpashop.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = "/carts")
-public class CartController {
+public class CartController extends BasicController{
 	@Autowired
 	CartService cartService;
 	@Autowired
@@ -29,13 +33,17 @@ public class CartController {
 	ItemService itemService;
 	
 	@GetMapping("")
-	public String list(Principal principal, Model model) {
+	public String list(Principal principal, Model model, Integer page) {
 		final String username = principal.getName();
 		final Member member = memberService.findByEmail(username);
-		final List<Cart> carts = cartService.getCartList(member);
 		
-		double totalPrice = carts.stream().mapToDouble(cart -> cart.getQuantity() * cart.getOrderPrice()).sum();
-		model.addAttribute("carts", carts);
+		Pageable pageable = createPage(page);
+		
+		final Page<Cart> carts = cartService.getCartList(member, pageable);
+		
+		double totalPrice = carts.getContent().stream().mapToDouble(cart -> cart.getQuantity() * cart.getOrderPrice()).sum();
+		model.addAttribute("page", carts);
+		model.addAttribute("pagenation", createPagination(carts));
 		model.addAttribute("totalPrice", totalPrice);
 		
 		return "/carts/cartList";

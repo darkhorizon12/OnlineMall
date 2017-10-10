@@ -1,11 +1,17 @@
 package org.juon.jpashop.service;
 
+import static java.util.stream.Collectors.toList;
+
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 import org.juon.jpashop.domain.CategoryItem;
 import org.juon.jpashop.domain.item.Item;
 import org.juon.jpashop.repository.ItemRepository;
+import org.juon.jpashop.repository.ItemRepositoryImpl;
 import org.juon.jpashop.utils.Pagination;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +22,8 @@ public class ItemService {
 
 	@Autowired
 	ItemRepository itemRepository;
+	@Autowired
+	ItemRepositoryImpl itemRepositoryImpl;
 	
 	public void saveItem(Item item) {
 		itemRepository.save(item);
@@ -49,5 +57,20 @@ public class ItemService {
 				FileSystemUtils.deleteRecursively(file);
 			}
 		}
+	}
+	
+	public List<Item> findAllItems() {
+		Stream<Item> itemStreams = itemRepositoryImpl.findAllItems();
+		List<Item> items = 
+				itemStreams.filter(item -> item.getPrice() > 20_000).collect(toList());
+		
+		return items;
+	}
+	
+	public List<Item> fifindMoreExpensiveThanPrice(Double price) {
+		Map<String, Double> param = new HashMap<>();
+		param.put("price", price);
+		Stream<Item> stream = itemRepositoryImpl.findMoreExpensiveThanPrice(price);
+		return stream.collect(toList());
 	}
 }

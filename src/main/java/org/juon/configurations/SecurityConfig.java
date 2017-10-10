@@ -24,8 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	public static final String REMEMBER_ME_KEY = "arahansaKey";
 	@Autowired DataSource dataSource;
-	@Autowired
-	UserDetailsService userDetailsService;
+	@Autowired UserDetailsService userDetailsService;
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

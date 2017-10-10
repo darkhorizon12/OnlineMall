@@ -41,7 +41,7 @@ public class AspectConfig {
 	@Pointcut("execution(* org.juon.jpashop.repository.*.*(..))")
 	private void repositoryLevel() {}
 	
-	@Before("repositoryLevel()")
+/*	@Before("repositoryLevel()")
 	public void logDaoParameter(JoinPoint joinPoint) {
 		logger.info("\n##################### logDaoAccess ################################\n");
 		logger.info(joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature());
@@ -49,7 +49,7 @@ public class AspectConfig {
 		Object[] args = joinPoint.getArgs();
 		Arrays.asList(args).stream().map(arg -> String.valueOf(arg)).forEach(System.out::println);
 		logger.info("\n#############################################################\n");
-	}
+	}*/
 	
 
 }

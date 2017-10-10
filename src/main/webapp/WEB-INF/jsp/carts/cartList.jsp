@@ -23,7 +23,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${carts}" var="cart">
+            <c:forEach items="${page.content}" var="cart">
                 <tr>
                     <td>${cart.id}</td>
                     <td><a href="/items/${cart.item.id }/view">${cart.item.name}</a></td>
@@ -43,7 +43,7 @@
 	<button type="button" id="orderBtn" class="btn btn-default">ORDER</button>    
 	<button type="button" id="continueBtn" class="btn btn-default">CONTINUE</button>    
     
-    <%@ include file="../fragments/pagination.jsp" %>
+    ${pagenation }
 
     <jsp:include page="../fragments/footer.jsp" />
 
