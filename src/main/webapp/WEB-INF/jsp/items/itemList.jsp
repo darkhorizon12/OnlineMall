@@ -24,7 +24,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${items}" var="item">
+            <c:forEach items="${page.content}" var="item">
                 <tr>
                     <td>${item.id}</td>
                     <td><a href="/items/${item.id }/view">${item.name}</a></td>
@@ -40,7 +40,7 @@
         </table>
     </div>
     
-    <%@ include file="../fragments/pagination.jsp" %>
+    ${pagination }
 
     <jsp:include page="../fragments/footer.jsp" />
 

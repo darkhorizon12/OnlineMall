@@ -17,11 +17,11 @@ public class RoleService {
 	RoleRepository roleRepository;
 	
 	public Role findByRole(RoleStatus roleStatus) {
-		return roleRepository.findByRole(roleStatus);
+		return roleRepository.findByRoleStatus(roleStatus);
 	}
 	
 	public Role findById(Long id) {
-		return roleRepository.findById(id);
+		return roleRepository.findOne(id);
 	}
 	
 	public List<Role> findAll() {

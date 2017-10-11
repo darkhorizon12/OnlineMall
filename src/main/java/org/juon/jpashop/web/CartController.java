@@ -10,10 +10,7 @@ import org.juon.jpashop.service.ItemService;
 import org.juon.jpashop.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +40,7 @@ public class CartController extends BasicController{
 		
 		double totalPrice = carts.getContent().stream().mapToDouble(cart -> cart.getQuantity() * cart.getOrderPrice()).sum();
 		model.addAttribute("page", carts);
-		model.addAttribute("pagenation", createPagination(carts));
+		model.addAttribute("pagination", createPagination(carts));
 		model.addAttribute("totalPrice", totalPrice);
 		
 		return "/carts/cartList";

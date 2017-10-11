@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-//@ContextConfiguration(locations = "classpath:appConfig.xml")
 @Transactional
 public class CategoryServiceTest {
 

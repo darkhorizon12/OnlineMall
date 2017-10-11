@@ -11,7 +11,7 @@ public class BasicController {
 		if (page == null) {
 			return new PageRequest(0, PAGE_SIZE);
 		} else {
-			return new PageRequest(page, PAGE_SIZE);
+			return new PageRequest(page - 1, PAGE_SIZE);
 		}
 	}
 	
@@ -22,11 +22,11 @@ public class BasicController {
 			sb.append("<li><a href=\"?page=1\">First</a></li>");
 		}
 		if (page.hasPrevious()) {
-			sb.append("<li><a href=\"?page=").append(page.getNumber() - 1).append("\">&lt;&lt;</a></li>");
+			sb.append("<li><a href=\"?page=").append(page.getNumber()).append("\">&lt;&lt;</a></li>");
 		}
 		sb.append("<li class=\"active\"><a href=\"#this\">").append(page.getNumber() + 1).append("</a></li>");
 		if (page.hasNext()) {
-			sb.append("<li><a href=\"?page=").append(page.getNumber() + 1).append("\">&gt;&gt;</a></li>");
+			sb.append("<li><a href=\"?page=").append(page.getNumber() + 2).append("\">&gt;&gt;</a></li>");
 		}
 		if (!page.isLast()) {
 			sb.append("<li><a href=\"?page=").append(page.getTotalPages()).append("\">Last</a></li>");

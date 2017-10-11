@@ -8,6 +8,10 @@ target/
 .project
 .settings
 .springBeans
+*.jpg
+*.jpeg
+*.gif
+
 
 ### IntelliJ IDEA ###
 .idea

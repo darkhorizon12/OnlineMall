@@ -1,35 +1,17 @@
 package org.juon.jpashop.repository;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.util.stream.Stream;
 
 import org.juon.jpashop.domain.Category;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-@Repository
-@Transactional
-public class CategoryRepository {
-	@PersistenceContext EntityManager em;
+public interface CategoryRepository extends JpaRepository<Category, Long>{
 	
-	public void save (Category category) {
-		em.persist(category);
-	}
+	@Query("SELECT c FROM Category c WHERE c.parent IS NULL")
+	Stream<Category> findParent();
 	
-	public Category findOne(Long id) {
-		return em.find(Category.class, id);
-	}
-	
-	public List<Category> findParent() {
-		return em.createQuery("SELECT c FROM Category c WHERE c.parent IS NULL", Category.class)
-				.getResultList();
-	}
-	
-	public List<Category> findChildren(Long id) {
-		return em.createQuery("SELECT c FROM Category c WHERE c.parent.id = :parentId", Category.class)
-				.setParameter("parentId", id)
-				.getResultList();
-	}
+	@Query("SELECT c FROM Category c WHERE c.parent.id = :parentId")
+	Stream<Category> findChildren(@Param("parentId") Long id);
 }

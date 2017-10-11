@@ -29,10 +29,10 @@ public class MemberService {
 	}
 	
 	private void validateDuplicateMember(Member member) {
-		List<Member> findMembers = 
-				memberRepository.findListByEmail(member.getEmail());
+		Member findMember = 
+				memberRepository.findByEmail(member.getEmail());
 		
-		if (!findMembers.isEmpty()) {
+		if (findMember != null) {
 			throw new IllegalStateException("Already exists!");
 		}
 	}

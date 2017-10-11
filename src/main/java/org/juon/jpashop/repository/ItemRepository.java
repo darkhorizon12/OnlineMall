@@ -1,55 +1,18 @@
 package org.juon.jpashop.repository;
 
-import java.util.List;
+import java.util.stream.Stream;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-
-import org.juon.jpashop.domain.CategoryItem;
 import org.juon.jpashop.domain.item.Item;
-import org.juon.jpashop.utils.Pagination;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-@Repository
-@Transactional
-public class ItemRepository {
+public interface ItemRepository extends JpaRepository<Item, Long>{
 	
-	@PersistenceContext EntityManager em;
+	Page<Item> findAll(Pageable pageable);
 	
-	public void save(Item item) {
-		if(item.getId() == null) {
-			em.persist(item);
-		} else {
-			em.merge(item);
-		}
-	}
-	
-	public void saveCategoryItem(CategoryItem categoryItem) {
-		em.persist(categoryItem);
-	}
-	
-	public Item findOne(Long id) {
-		return em.find(Item.class, id);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<Item> findAll(Pagination pagination) {
-		Query query = em.createQuery("SELECT i FROM Item i", Item.class);
-		query.setFirstResult(pagination.getStartPos());
-		query.setMaxResults(pagination.getPageSize());
-		
-		Query totalQuery = em.createQuery("SELECT COUNT(i.id) FROM Item i");
-		Long totalCount = (Long) totalQuery.getSingleResult();
-		System.out.println("BEFORE PAGINATIoN >>> " + pagination);
-		pagination.setTotalCount(totalCount.intValue());
-		System.out.println("AFTER PAGINATIoN >>> " + pagination);
-		
-		return query.getResultList();
-	}
-	
-	public void deleteItem(Item item) {
-		em.remove(item);
-	}
+	@Query("SELECT i FROM Item i WHERE i.price > :price")
+	Stream<Item> findMoreExpensiveThanPrice(@Param("price") Double price);
 }

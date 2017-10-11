@@ -10,9 +10,10 @@ import org.juon.jpashop.domain.item.Item;
 import org.juon.jpashop.service.CategoryService;
 import org.juon.jpashop.service.ItemService;
 import org.juon.jpashop.service.StorageService;
-import org.juon.jpashop.utils.Pagination;
 import org.juon.json.CategoryJson;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,16 +30,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/items")
-public class ItemController {
-	@Autowired ItemService itemService;
-	@Autowired CategoryService categoryService;
-	@Autowired StorageService storageServcie;
+public class ItemController extends BasicController{
+	@Autowired 
+	ItemService itemService;
+	@Autowired 
+	CategoryService categoryService;
+	@Autowired 
+	StorageService storageServcie;
 	
 	@RequestMapping("")
-	public String list(Model model, Pagination pagination) {
-		List<Item> items = itemService.findAll(pagination);
-		model.addAttribute("items", items);
-		model.addAttribute("pagination", pagination);
+	public String list(Model model, Integer page) {
+		Pageable pageable = createPage(page);
+		final Page<Item> items = itemService.findAll(pageable);
+		
+		model.addAttribute("page", items);
+		model.addAttribute("pagination", createPagination(items));
 		
 		return "items/itemList";
 	}
@@ -79,7 +85,6 @@ public class ItemController {
 			categoryItem.setItem(item);
 			categoryItem.setCategory(categoryService.findOne(Long.valueOf(category1)));
 			item.getCategoryItems().add(categoryItem);
-			//itemService.saveCategoryItem(categoryItem);
 		}
 		
 		if (StringUtils.hasText(category2)) {
@@ -87,7 +92,6 @@ public class ItemController {
 			categoryItem.setItem(item);
 			categoryItem.setCategory(categoryService.findOne(Long.valueOf(category2)));
 			item.getCategoryItems().add(categoryItem);
-			//itemService.saveCategoryItem(categoryItem);
 		}
 
 		itemService.saveItem(item);

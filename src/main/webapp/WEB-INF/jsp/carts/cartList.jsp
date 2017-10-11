@@ -43,7 +43,7 @@
 	<button type="button" id="orderBtn" class="btn btn-default">ORDER</button>    
 	<button type="button" id="continueBtn" class="btn btn-default">CONTINUE</button>    
     
-    ${pagenation }
+    ${pagination }
 
     <jsp:include page="../fragments/footer.jsp" />
 

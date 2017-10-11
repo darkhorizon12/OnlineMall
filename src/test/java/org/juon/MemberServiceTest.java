@@ -47,7 +47,7 @@ public class MemberServiceTest {
 		
 		assertEquals(role, m.getRoles().get(0));
 		
-		/*
+		
 		Member member = new Member();
 		member.setName("kim");
 		member.setPassword("1234567");
@@ -56,7 +56,7 @@ public class MemberServiceTest {
 		//When
 		Long saveId = service.join(member);
 		assertEquals(member, repository.findOne(saveId));
-		*/
+		
 		//Then
 	}
 	
