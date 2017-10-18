@@ -6,7 +6,7 @@
 	<groupId>org.juon</groupId>
 	<artifactId>onlineMallSystem</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>OnlineMall</name>
 	<description>Online Mall System by JPA</description>

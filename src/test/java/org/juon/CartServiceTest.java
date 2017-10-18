@@ -28,7 +28,7 @@ public class CartServiceTest {
 	@Autowired ItemRepository itemRepository;
 	@Autowired CartService cartService;
 	final String username = "member1@123.com";
-	@Test
+/*	@Test
 	public void test() {
 		Member member = memberRepository.findByEmail(username);
 		Item item1 = itemRepository.findOne(215L);
@@ -48,8 +48,8 @@ public class CartServiceTest {
 		assertEquals(170, item1.getStockQuantity());
 		
 		long count = cartRepository.findByMember(member).count();
-		/*assertEquals(2, count);*/
-	}
+		assertEquals(2, count);
+	}*/
 	
 	@Test
 	public void listTest() {

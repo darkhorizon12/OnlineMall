@@ -50,7 +50,7 @@ public class ItemServiceTest {
 	public void findMoreExpensiveThanPrice() {
 		List<Item> items = itemService.fifindMoreExpensiveThanPrice(20_000D);
 		System.out.println(items);
-		assertEquals(0, items.size());
+		assertEquals(2, items.size());
 	}
 
 }

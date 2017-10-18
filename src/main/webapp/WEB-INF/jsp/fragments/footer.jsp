@@ -1,3 +1,3 @@
 <div class="footer">
-    <p>&copy; Hello Shop 2014</p>
+    <p>&copy; MY OWN SHOP</p>
 </div>
