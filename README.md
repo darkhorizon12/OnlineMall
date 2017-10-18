@@ -8,7 +8,8 @@ This is a personal project that is progressive.
 - Spring Security
 - Spring AOP
 - Servlet by Java Config
-- Scheduler by Java Conig
+- Scheduler by Java Config
+- Locale Configure by Java Config
 - Java 8 (Stream API, Method Reference, Functional Interfaces ..)
 - Spring-Data-Jpa
 
