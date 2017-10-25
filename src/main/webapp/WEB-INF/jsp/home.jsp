@@ -8,24 +8,62 @@
 
 <body>
 
+<jsp:include page="fragments/navi.jsp"/>
 <div class="container">
 
-    <jsp:include page="fragments/bodyHeader.jsp" />
+	<div class="row">
+	<jsp:include page="fragments/menu.jsp"/> 
 
-    <div class="jumbotron">
-        <h1><spring:message code="main.title" /> </h1>
-        <!-- p class="lead">MEMBER</p-->
-        <p><a class="btn btn-lg btn-primary" href="/members">MEMBER LIST</a></p>
-        <p><a class="btn btn-lg btn-info" href="/items/new">REGISTER PRODUCT</a></p>
-        <p><a class="btn btn-lg btn-info" href="/items">PRODUCT LIST</a></p>
-        <p><a class="btn btn-lg btn-success" href="/carts">CART</a></p>
-        <p><a class="btn btn-lg btn-success" href="/coupons/masters">COUPON MASTER LIST</a></p>
-        <p><a class="btn btn-lg btn-success" href="/order">ORDER LIST</a></p>
-    </div>
+        <div class="col-lg-9">
 
-    <jsp:include page="fragments/footer.jsp" />
+          <div class="row">
+          <c:forEach items="${mainItems }" var="item">
 
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <a href="#"><img class="card-img-top" width="700px" height="400px" src="/download/${item.id }" alt="${item.name }"></a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="/items/${item.id }/view">${item.name }</a>
+                  </h4>
+                  <h5>${item.price }</h5>
+                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
+              </div>
+            </div>
+          </c:forEach>
+
+           </div>
+
+          <div class="row">
+          <c:forEach items="${page.content }" var="item">
+
+            <div class="col-lg-4 col-md-6 mb-4">
+              <div class="card h-100">
+                <a href="#"><img class="card-img-top" width="700px" height="400px" src="/download/${item.id }" alt="${item.name }"></a>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    <a href="/items/${item.id }/view">${item.name }</a>
+                  </h4>
+                  <h5>${item.price }</h5>
+                  <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+                </div>
+                <div class="card-footer">
+                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
+              </div>
+            </div>
+          </c:forEach>
+
+           </div>
+          <!-- /.row -->
+
+        </div>
+	</div>
 </div> <!-- /container -->
-
+<jsp:include page="fragments/footer.jsp" />
 </body>
 </html>
